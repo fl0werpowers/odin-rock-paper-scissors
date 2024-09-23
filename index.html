@@ -11,15 +11,18 @@
       (i am doing the HTML UI because i am smartypants but the exercise logic
       will be adhered to, pinky swear)
     </p>
-    <input
-      type="text"
-      name="humanGuess"
-      id="humanGuess"
-      title="Input field for making a guess at rock-paper-scissors"
-      placeholder="Rock, paper, scissors?"
-      required
-    />
-    <button>Make a guess!</button>
+    <form>
+      <input
+        type="text"
+        name="humanGuess"
+        id="humanGuess"
+        title="Input should be either rock, paper, or scissors."
+        placeholder="Rock, paper, scissors?"
+        pattern="\b[Rr][Oo][Cc][Kk]\b|\b[Pp][Aa][Pp][Ee][Rr]\b|\b[Ss][Cc][Ii][Ss][Ss][Oo][Rr][Ss]\b"
+        required
+      />
+      <button type="submit">Make a guess!</button>
+    </form>
   </body>
-  <script></script>
+  <script src="script.js"></script>
 </html>
