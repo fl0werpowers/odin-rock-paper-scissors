@@ -11,4 +11,21 @@ function getComputerChoice() {
 	}
 }
 
-console.log(getComputerChoice());
+document.querySelector("form").addEventListener("submit", (event) => {
+	const formData = new FormData(event.target);
+	console.log(getHumanChoice(formData.get("humanGuess")));
+
+	event.preventDefault();
+});
+
+function getHumanChoice(choice) {
+	const choiceLower = choice.toLowerCase();
+	if (
+		choiceLower === "rock" ||
+		choiceLower === "paper" ||
+		choiceLower === "scissors"
+	)
+		return choiceLower;
+
+	return null;
+}
