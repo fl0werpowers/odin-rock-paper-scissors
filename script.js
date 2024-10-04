@@ -1,3 +1,13 @@
+document.querySelector("form").addEventListener("submit", (event) => {
+	const formData = new FormData(event.target);
+	console.log(getHumanChoice(formData.get("humanGuess")));
+
+	event.preventDefault();
+});
+
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
 	const computerGuess = Math.floor(Math.random() * 3);
 
@@ -10,13 +20,6 @@ function getComputerChoice() {
 			return "scissors";
 	}
 }
-
-document.querySelector("form").addEventListener("submit", (event) => {
-	const formData = new FormData(event.target);
-	console.log(getHumanChoice(formData.get("humanGuess")));
-
-	event.preventDefault();
-});
 
 function getHumanChoice(choice) {
 	const choiceLower = choice.toLowerCase();
