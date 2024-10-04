@@ -1,32 +1,88 @@
 document.querySelector("form").addEventListener("submit", (event) => {
-	const formData = new FormData(event.target);
+	const humanInput = new FormData(event.target).get("humanGuess");
 
-	playRound(getHumanChoice(formData.get("humanGuess")));
+	playGame(humanInput);
 
 	event.preventDefault();
 });
 
-let roundsPlayed = 0;
+let roundsPlayed = 1;
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound(humanChoice) {
+const roundText = document.getElementById("round");
+const humanScoreText = document.getElementById("humanScore");
+const computerScoreText = document.getElementById("computerScore");
+const gameText = document.getElementById("gameText");
+const gameOverText = document.getElementById("gameOverText");
+
+function playGame(humanInput) {
+	if (roundsPlayed >= 5) {
+		gameOverText.innerText = gameOver();
+		return;
+	}
+	const humanChoice = getHumanChoice(humanInput);
 	const computerChoice = getComputerChoice();
 
+	switch (playRound(humanChoice, computerChoice)) {
+		case "human": {
+			humanScore++;
+			humanScoreText.innerText = humanScore;
+			break;
+		}
+		case "computer":
+			computerScore++;
+			computerScoreText.innerText = computerScore;
+			break;
+	}
+
+	if (roundsPlayed < 5) roundsPlayed++;
+	roundText.innerText = roundsPlayed;
+}
+
+function resetGame() {
+	computerScore = 0;
+	humanScore = 0;
+	roundsPlayed = 1;
+	humanScoreText.innerText = humanScore;
+	computerScoreText.innerText = computerScore;
+	roundText.innerText = roundsPlayed;
+	gameText.innerText = "Let's get started!";
+	gameOverText.innerText = "";
+}
+
+function playRound(humanChoice, computerChoice) {
 	switch (rpsDecideWinner(humanChoice, computerChoice)) {
 		case "opp1": {
-			console.log(`You win! ${rpsFormatWinText(humanChoice, computerChoice)}`);
+			gameText.innerText = `You win! ${rpsFormatWinText(
+				humanChoice,
+				computerChoice,
+			)}`;
 			return "human";
 		}
 		case "opp2": {
-			console.log(`You lose! ${rpsFormatWinText(computerChoice, humanChoice)}`);
+			gameText.innerText = `You lose! ${rpsFormatWinText(
+				computerChoice,
+				humanChoice,
+			)}`;
 			return "computer";
 		}
 		case "draw": {
-			console.log("Draw!");
+			gameText.innerText = `Draw! You both picked ${humanChoice}!`;
 			return "draw";
 		}
 	}
+}
+
+function gameOver() {
+	const isDraw = humanScore === computerScore;
+	return `Game over! ${
+		isDraw
+			? "It's a draw!"
+			: humanScore > computerScore
+				? "You won!"
+				: "You lost!"
+	}`;
 }
 
 function rpsDecideWinner(opp1, opp2) {

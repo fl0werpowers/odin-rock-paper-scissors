@@ -11,6 +11,12 @@
       (i am doing the HTML UI because i am smartypants but the exercise logic
       will be adhered to, pinky swear)
     </p>
+    <p>Round <span id="round">1</span></p>
+    <p>
+      Human = <span id="humanScore">0</span>, computer =
+      <span id="computerScore">0</span>
+    </p>
+
     <form>
       <input
         type="text"
@@ -22,7 +28,10 @@
         required
       />
       <button type="submit">Make a guess!</button>
+      <button type="reset" onclick="resetGame()">Reset game</button>
     </form>
+    <p id="gameText">Let's get started!</p>
+    <p id="gameOverText"></p>
   </body>
   <script src="script.js"></script>
 </html>
