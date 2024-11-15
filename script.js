@@ -1,14 +1,13 @@
-let roundsPlayed = 1;
-let humanScore = 0;
-let computerScore = 0;
-
-const gameForm = document.querySelector("form");
 const humanGuessField = document.getElementById("humanGuess");
 const roundText = document.getElementById("round");
 const humanScoreText = document.getElementById("humanScore");
 const computerScoreText = document.getElementById("computerScore");
 const gameText = document.getElementById("gameText");
 const gameOverText = document.getElementById("gameOverText");
+
+let roundsPlayed = 1;
+let humanScore = 0;
+let computerScore = 0;
 
 function resetGame() {
 	computerScore = 0;
@@ -127,11 +126,12 @@ function getHumanChoice(choice) {
 	return null;
 }
 
-gameForm.addEventListener("submit", (event) => {
+document.addEventListener("submit", (event) => {
 	playGame(humanGuessField.value);
 	humanGuessField.value = "";
 	humanGuessField.focus();
 
 	event.preventDefault();
 });
-gameForm.addEventListener("reset", resetGame);
+
+document.addEventListener("reset", resetGame);
