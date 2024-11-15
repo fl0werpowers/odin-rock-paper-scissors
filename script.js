@@ -1,9 +1,11 @@
 const gameForm = document.querySelector("form");
 
-gameForm.addEventListener("submit", (event) => {
-	const humanInput = new FormData(event.target).get("humanGuess");
+const humanGuessField = document.getElementById("humanGuess");
 
-	playGame(humanInput);
+gameForm.addEventListener("submit", (event) => {
+	playGame(humanGuessField.value);
+	humanGuessField.value = "";
+	humanGuessField.focus();
 
 	event.preventDefault();
 });
