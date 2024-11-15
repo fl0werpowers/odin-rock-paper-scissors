@@ -1,10 +1,13 @@
-document.querySelector("form").addEventListener("submit", (event) => {
+const gameForm = document.querySelector("form");
+
+gameForm.addEventListener("submit", (event) => {
 	const humanInput = new FormData(event.target).get("humanGuess");
 
 	playGame(humanInput);
 
 	event.preventDefault();
 });
+gameForm.addEventListener("reset", resetGame);
 
 let roundsPlayed = 1;
 let humanScore = 0;
