@@ -1,27 +1,33 @@
-const gameForm = document.querySelector("form");
-
-const humanGuessField = document.getElementById("humanGuess");
-
-gameForm.addEventListener("submit", (event) => {
-	playGame(humanGuessField.value);
-	humanGuessField.value = "";
-	humanGuessField.focus();
-
-	event.preventDefault();
-});
-gameForm.addEventListener("reset", resetGame);
-
 let roundsPlayed = 1;
 let humanScore = 0;
 let computerScore = 0;
 
+const gameForm = document.querySelector("form");
+const humanGuessField = document.getElementById("humanGuess");
 const roundText = document.getElementById("round");
 const humanScoreText = document.getElementById("humanScore");
 const computerScoreText = document.getElementById("computerScore");
 const gameText = document.getElementById("gameText");
 const gameOverText = document.getElementById("gameOverText");
 
+function resetGame() {
+	computerScore = 0;
+	humanScore = 0;
+	roundsPlayed = 1;
+	humanScoreText.innerText = humanScore;
+	computerScoreText.innerText = computerScore;
+	roundText.innerText = roundsPlayed;
+	gameText.innerText = "Let's get started!";
+	gameOverText.innerText = "";
+}
+
 function playGame(humanInput) {
+	if (!humanInput) {
+		gameText.innerText =
+			'Invalid input! Type in "rock", "paper", or "scissors".';
+		return;
+	}
+
 	if (roundsPlayed >= 5) {
 		gameOverText.innerText = gameOver();
 		return;
@@ -43,17 +49,6 @@ function playGame(humanInput) {
 
 	if (roundsPlayed < 5) roundsPlayed++;
 	roundText.innerText = roundsPlayed;
-}
-
-function resetGame() {
-	computerScore = 0;
-	humanScore = 0;
-	roundsPlayed = 1;
-	humanScoreText.innerText = humanScore;
-	computerScoreText.innerText = computerScore;
-	roundText.innerText = roundsPlayed;
-	gameText.innerText = "Let's get started!";
-	gameOverText.innerText = "";
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -131,3 +126,12 @@ function getHumanChoice(choice) {
 
 	return null;
 }
+
+gameForm.addEventListener("submit", (event) => {
+	playGame(humanGuessField.value);
+	humanGuessField.value = "";
+	humanGuessField.focus();
+
+	event.preventDefault();
+});
+gameForm.addEventListener("reset", resetGame);
