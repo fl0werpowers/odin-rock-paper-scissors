@@ -18,19 +18,18 @@
       <span id="computerScore">0</span>
     </p>
 
-    <form>
-      <input
-        type="text"
-        name="humanGuess"
-        id="humanGuess"
-        title="Input should be either rock, paper, or scissors."
-        placeholder="Rock, paper, scissors?"
-        pattern="\b[Rr][Oo][Cc][Kk]\b|\b[Pp][Aa][Pp][Ee][Rr]\b|\b[Ss][Cc][Ii][Ss][Ss][Oo][Rr][Ss]\b"
-        required
-      />
-      <button type="submit">Make a guess!</button>
-      <button type="reset">Reset game</button>
-    </form>
+    <input
+      type="text"
+      name="humanGuess"
+      id="humanGuess"
+      title="Input should be either rock, paper, or scissors."
+      placeholder="Rock, paper, scissors?"
+      pattern="\b[Rr][Oo][Cc][Kk]\b|\b[Pp][Aa][Pp][Ee][Rr]\b|\b[Ss][Cc][Ii][Ss][Ss][Oo][Rr][Ss]\b"
+      required
+    />
+    <button type="submit">Make a guess!</button>
+    <button type="reset">Reset game</button>
+
     <p id="gameText">Let's get started!</p>
     <p id="gameOverText"></p>
   </body>

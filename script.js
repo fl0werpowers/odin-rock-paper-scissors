@@ -126,12 +126,17 @@ function getHumanChoice(choice) {
 	return null;
 }
 
-document.addEventListener("submit", (event) => {
-	playGame(humanGuessField.value);
-	humanGuessField.value = "";
-	humanGuessField.focus();
-
-	event.preventDefault();
+document.addEventListener("click", (event) => {
+	switch (event.target.type) {
+		case "submit": {
+			playGame(humanGuessField.value);
+			humanGuessField.value = "";
+			humanGuessField.focus();
+			break;
+		}
+		case "reset": {
+			resetGame();
+			break;
+		}
+	}
 });
-
-document.addEventListener("reset", resetGame);
